@@ -472,13 +472,13 @@ main {
 }
 
 .btn1 {
-  background-color: #426358;
+  background-color: #6533ae;
   color: white;
-  border: 2px solid #1aa560;
+  border: 2px solid #6533ae;
   padding: 5px;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 5px;
-  width: 100px;
+  width: 110px;
   /* margin-left: 10px; */
 }
 
@@ -573,5 +573,19 @@ input:checked + .slider:before {
 
 .machinespec>div>p>span{
  color: lightskyblue;
-  
+}
+
+.tablediv{
+  margin-top: 15px;
+  overflow:auto;
+  flex-direction: column;
+  background:  #1f2642;
+  border-radius: 0.625rem;
+  box-shadow: 0 5px 10px rgba(12,16,31,0.4);
+  display: inline-block;
+  width: 95%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+
 }
