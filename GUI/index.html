@@ -93,47 +93,47 @@
           <div class="main__container">
             <h2>Connections</h2>
             <div class="connection do-nicescroll">
-              <a href="#">
+              <a href="#" class="connectedDevice activeDevice" >
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-check"></i></p>
                 <p>SGR : FGX-1542</p>
               </a>
-              <a href="#">
+              <a href="#" class="connectedDevice">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-check"></i></p>
                 <p>SGR : FGX-1542</p>
               </a>
-              <a href="#">
+              <a href="#" class="connectedDevice">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-times"></i></p>
                 <p>SGR : FGX-1542</p>
               </a>
-              <a href="#">
+              <a href="#" class="connectedDevice">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-check"></i></p>
                 <p>SGR : FGX-1542</p>
               </a>
-              <a href="#">
+              <a href="#" class="connectedDevice">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-times"></i></p>
                 <p>SGR : FGX-1542</p>
               </a>
-              <a href="#">
+              <a href="#" class="connectedDevice">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-times"></i></p>
                 <p>SGR : FGX-1542</p>
               </a>
-              <a href="#">
+              <a href="#" class="connectedDevice">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-check"></i></p>
                 <p>SGR : FGX-1542</p>
               </a>
-              <a href="#">
+              <a href="#" class="connectedDevice">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-check"></i></p>
                 <p>SGR : FGX-1542</p>
               </a>
-              <a href="#">
+              <a href="#" class="connectedDevice">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-times"></i></p>
                 <p>SGR : FGX-1542</p>
@@ -144,9 +144,21 @@
               <button class="btn" onclick="divVisibility('Div5');">Tables</button> 
               <button class="btn" onclick="divVisibility('Div6');">Logs</button>
             </div>
+            
             <div class="machinespec">
-              <div></div>
-              <div></div>
+              
+              <div style="flex: 50%">
+                <h3>MACHINE SPEC</h3>
+              <p>OS: <span>Windows</span> </p>
+              <p>SENSITIVITY: <span>15</span> </p>
+              <p>AI ENABLED: <span>TRUE</span> </p>
+              <p>SER: <span>FEXGDDKJ</span> </p>
+              </div>
+              <div style="flex: 50%; margin-top: 30px;">
+                <p>BLOCKED CONNECTION: <span>100</span> </p>
+                <p>PROCESSED CONNECTION: <span>100000</span> </p>
+                <button >CONNECT</button>
+              </div>
             </div>
           </div>
         </div>
@@ -304,18 +316,24 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/874986f905.js" crossorigin="anonymous"></script>
     <script>
+      // active navigation tab
       $(".sidebar__link").click(function() { 
-        
-        // Select all list items 
         var listItems = $(".sidebar__link"); 
-          
-        // Remove 'active' tag for all list items 
         for (let i = 0; i < listItems.length; i++) { 
             listItems[i].classList.remove("active_menu_link"); 
         } 
-          
-        // Add 'active' tag for currently selected item 
         this.classList.add("active_menu_link"); 
+      });
+    </script>
+
+    <script>
+      // active connection
+      $(".connectedDevice").click(function() {  
+        var listItems = $(".connectedDevice"); 
+        for (let i = 0; i < listItems.length; i++) { 
+            listItems[i].classList.remove("activeDevice"); 
+        } 
+        this.classList.add("activeDevice"); 
       });
     </script>
   </body>
