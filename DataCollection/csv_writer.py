@@ -12,7 +12,9 @@ class DataWriter:
         self.writer = csv.DictWriter(self.csvfile, delimiter =',',fieldnames=fields)    
         #self.fieldnames={'src_port':'src_port' , 'dst_port':'dst_port', 'seq':'seq', 'ack':'ack', 'doff':'doff', 'tcph_len':'tcph_len','h_size':'h_size', 'data_size':'data_size', 'is_proxy':'is_proxy'}
         #self.writer.writerow(self.fieldnames)
-        #self.data = {'src_port':0 , 'dst_port':0, 'seq':0, 'ack':0, 'doff':0, 'tcph_len':0,'h_size':0, 'data_size':0, 'is_proxy':0}
+        self.data = {'version':0,'protocol':0,'ttl':0,'src_addr':0,
+                            'dst_addr':0,'src_port':0,'dst_port':0,
+                            'seq_num':0,'ack_num':0,'flag':0,'data_size':0,'service':"HTTP",'is_proxy':0}
     def write_data(self):
         self.writer.writerow(self.data)
     def populate(self,args):
@@ -45,7 +47,7 @@ class PacketData:
         
         
         
-    # this function is meant to work with sockets     
+    # this function is meant to work with sockets; but shows error in windows    
     def strip_packet(pack,is_proxy):
         #type  = 0 non proxy , 1 proxy 
         packet = pack[0]
@@ -80,45 +82,88 @@ class PacketData:
     def writer_init(self):
         self.fields = ['version','protocol','ttl','src_addr','dst_addr','src_port','dst_port','seq_num','ack_num','flag','data_size','service','is_proxy']
         self.csv_writer = DataWriter('ipfile.csv',fields)
+        
        
+    
+    
     # for pydivert
-    def resolve_protocol(packet):
-    if packet.protocol[0]==pydivert.Protocol.TCP:
-        print("src_port" + str(packet.tcp.src_port))
-        print("dest_port" + str(packet.tcp.dst_port))
+    def resolve_protocol(self,packet):
+        if packet.protocol[0]==pydivert.Protocol.TCP:
+            print("src_port" + str(packet.tcp.src_port))
+            print("dest_port" + str(packet.tcp.dst_port))
         if packet.tcp.ack:
             return (packet.tcp.ack_num,packet.tcp.seq_num)
         else:
             return 0
-    def write_divert_packet(self,packet):
+    
+    
+    def write_divert_packet(self,packet,is_proxy):
         
+        
+        
+        src_addr= packet.src_addr
+        dst_addr = packet.dst_addr
         
         ver=0
         if packet.address_family == socket.AF_INET:
             ver=0
+            ttl=packet.ipv4.ttl
+            data_size = packet.ipv4.packet_len - packet.ipv4.header_len
+            
         elif  packet.address_family == socket.AF_INET6:
             ver=1
+            return 
         else:
-            ver=0
+            return
         
         
         #detect protocol , 1 if TCP
         protocol=0
-        if resolve_protocol(packet)!=1:
+        
+        if self.resolve_protocol(packet)!=1:
             protocol=1
+            src_port = packet.tcp.src_port
+            dst_port = packet.tcp.dst_port
+            seq_num = packet.tcp.seq_num
+            ack_num = packet.tcp.ack_num
+            flag_data = {'ns':0,'cwr':0,'ece':0,'urg':0,'ack':0,'psh':0,'rst':0,'syn':0,'fin':0}
+            flag_data_num=0
+            if packet.tcp.ns:
+                flag_data['ns']=1
+                flag_data_num^=(1<<1)
+            if packet.tcp.cwr:
+                flag_data['cwr']=1
+                flag_data_num^=(1<<2)
+            if packet.tcp.ece:
+                flag_data['ece']=1
+                flag_data_num^=(1<<3)
+            if packet.tcp.urg:
+                flag_data['urg']=1
+                flag_data_num^=(1<<4)
+            if packet.tcp.ack:
+                flag_data['ack']=1
+                flag_data_num^=(1<<5)
+            if packet.tcp.psh:
+                flag_data['psh']=1
+                flag_data_num^=(1<<6)
+            if packet.tcp.rst :
+                flag_data['rst']=1
+                flag_data_num^=(1<<7)
+            if packet.tcp.syn:
+                flag_data['syn']=1
+                flag_data_num^=(1<<8)
+            if packet.tcp.fin :
+                flag_data['fin']=1
+                flag_data_num^=(1<<9)
+            
+    #service = 0 mean http 
+        
+        self.fields_dict = {'version':ver,'protocol':protocol,'ttl':ttl,'src_addr':src_addr,
+                            'dst_addr':dst_addr,'src_port':src_port,'dst_port':dst_port,
+                            'seq_num':seq_num,'ack_num':ack_num,'flag':flag_data_num,'data_size':data_size,'service':0,'is_proxy':is_proxy}
         
         
-            
-            
-            
-            
-            
-            
-        self.fields_dict = {'version':ver,'protocol':protocol,'ttl':self.ttl,'src_addr':self.src_addr,
-                            'dst_addr':self.dst_addr,'src_port':self.src_port,'dst_port':self.dst_port,
-                            'seq_num':self.seq_num,'ack_num':self.ack_num,'flag':0,'data_size':self.data_size,'service':"HTTP",'is_proxy':is_proxy}
-        
-        
+        self.csv_writer.data=self.fields_dict
         
     #['version','protocol','ttl','src_addr','dst_addr','src_port','dest_port','seq_num','ack_num','flag','data_size','service','is_proxy']
 
@@ -126,16 +171,17 @@ class PacketData:
 
 
 if __name__ == "__main__":
-    fields = ['version','protocol','ttl','src_addr','dst_addr','src_port','dest_port','seq_num','ack_num','flag','data_size','service','is_proxy']
-    writer = DataWriter('ipfile.csv',fields)
-    stripper=PacketData()
+    fields = ['version','protocol','ttl','src_addr','dst_addr','src_port','dst_port','seq_num','ack_num','flag','data_size','service','is_proxy']
+    analyser=PacketData()
+    analyser.writer_init()
     
     
     
     
-    with pydivert.WinDivert() as w:
+    with pydivert.WinDivert('tcp.DstPort == 80 and tcp.PayloadLength > 0') as w:
         for packet in w:
-            stripper.write_divert_packet(packet)
+            analyser.write_divert_packet(packet,0)
+            analyser.csv_writer.write_data()
     
     
             
@@ -145,21 +191,7 @@ if __name__ == "__main__":
     
     
     
-    s= socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
-    s.listen(20)
-    
-    try:
-        s= socket.socket(socket.AF_INET,socket.SOCK_RAW,socket.IPPROTO_TCP)
-    except socket.error:
-        print('could not create')
-        sys.exit()
-    #s.bind(('',0))
-    s.listen()
-    packet = s.recv(1024)
-    stripper.writer_init()
-    stripper.strip_packet(packet,0)
-    stripper.csv_writer.write_data()
-      
+
         
     
         
