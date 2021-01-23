@@ -10,7 +10,7 @@ from scapy.layers.http import HTTPRequest # import HTTP packet
 from mitmproxy.utils import strutils
 from mitmproxy import ctx
 from mitmproxy import http
-import ipaddress,nmap
+import ipaddress,nmap,random
 
 class Addon(object):
 	num=1
@@ -31,7 +31,11 @@ class Addon(object):
 	def response(self, flow):
 		netrequest = assemble_request(flow.request).decode('utf-8')
 		soup = BeautifulSoup(flow.response.content, "html.parser")
-		soup.title
+		try:
+			titl =  soup.title
+		except Exception as e:
+			pass
+			
 
 	def list_filtering(self,filter_param):
 		#url filter
@@ -58,8 +62,12 @@ class Addon(object):
 		if filter_param.request.pretty_url.find('/tor/server/') != -1:
 			return [True,"Privacy breach (Tor Exit node)..",5547]
 
-		self.addtonmap(filter_param.server_conn.ip_address[0],filter_param.server_conn.ip_address[1])
-		#addtonmapprocess(filter_param.server_conn.ip_address)
+
+
+		if self.checknmap(filter_param.server_conn.ip_address[0],filter_param.server_conn.ip_address[1]):
+			return [True,"Proxy detected by scanners...",5548]
+		else:
+			self.addtonmap(filter_param.server_conn.ip_address[0],filter_param.server_conn.ip_address[1])
 			
 		return [False,"",0]
 		
@@ -81,20 +89,68 @@ class Addon(object):
 		return ret
 
 	def addtonmap(self,ip,port):
+		print("Trying adding to db",ip,port)
 		hfl = cursor.execute("""SELECT COUNT(*) FROM nmap_processed WHERE processed = 0 AND ip = ?;""",[str(ip)])
 		fkr = hfl.fetchone()[0]
+
+		print("found",fkr)
 		if fkr == 0:
 			cursor.executemany("""INSERT INTO nmap_processed VALUES (?,?,0);""",[(str(ip),port)])
+			conn.commit()
+
+	def checknmap(self,ip,port):
+		hfl = cursor.execute("""SELECT COUNT(*) FROM nmap_processed WHERE processed = 2 AND ip = ?;""",[str(ip)])
+		fkr = hfl.fetchone()[0]
+		print("Checking nmap database",fkr)
+		ret = True if fkr != 0 else False
+		return ret
 
 
+
+
+def scan_callback(host, scan_result):
+	print('_______________________________________________________________________')
+	print(host,scan_result)
+	time.sleep(5+random.randint(2,5))
+	proxy_methods = ['polipo','squid-http','http-proxy']
+	try:
+		for i in scan_result['scan'][host]['tcp']:
+			if scan_result['scan'][host]['tcp'][i]['name'] in proxy_methods:
+				print("Proxy detected blocking")
+				cursor.execute("""UPDATE nmap_processed SET processed = 2 WHERE ip = ?;""",[str(host)])
+				conn.commit()
+			
+	except Exception as e:
+		print("Scan error")
+
+	cursor.execute("""UPDATE nmap_processed SET processed = 1 WHERE ip = ?;""",[str(host)])
+	conn.commit()
+
+	print('_______________________________________________________________________')
+
+
+		
 
 def nmap_parse():
+	print("Started Thread")
+	nm = nmap.PortScannerAsync()
+	re_scan = nm.scan(hosts="127.0.0.1", arguments='--script http-open-proxy.nse -p8080', callback=scan_callback)
+	
+	while nm.still_scanning():
+		print("Continuing on batch scan ...")
+
+def nmap_parse():
+
 	hfl = cursor.execute("""SELECT * FROM nmap_processed WHERE processed = 0;""")
 	fkr = hfl.fetchall()
-	nm = nmap.PortScanner()
+	nm = nmap.PortScannerAsync()
 	for host in fkr:
-		re_scan = nm.scan(hosts=host[0], arguments='--script http-open-proxy.nse -p' +str(host[1]))
-	print("Launching nmap with:",hosts)
+		re_scan = nm.scan(hosts=host[0], arguments='--script http-open-proxy.nse -p' +str(host[1]), callback=scan_callback)
+
+	
+	while nm.still_scanning():
+		print("Continuing on batch scan ...")
+		nm.wait(2)
 
 
 
@@ -105,18 +161,20 @@ def nmap_parse():
 
 
 if __name__ == "__main__":
-	conn = sqlite3.connect('db/filtered.db')
+	conn = sqlite3.connect('db/filtered.db',check_same_thread=False)
 	cursor = conn.cursor()
 	print(cursor)
 
 	error_html = open('GUI/error.html').read()
-
+	threading.Timer(5, nmap_parse).start()
 
 	options = Options(listen_host='0.0.0.0', listen_port=8080, http2=True,client_certs='certs/')
 	m = DumpMaster(options, with_termlog=True, with_dumper=False)
 	config = ProxyConfig(options)
 	m.server = ProxyServer(config)
 	m.addons.add(Addon())
+
+
 
 	# run mitmproxy in backgroud, especially integrated with other server
 	loop = asyncio.get_event_loop()
