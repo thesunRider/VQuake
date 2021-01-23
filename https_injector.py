@@ -59,53 +59,20 @@ class Addon(object):
 		if filter_param.find('/tor/server/') != -1:
 			url_blocked.loc[len(df)] = [filter_param]
 			url_blocked.to_csv('db/url_filter.csv', mode='a', header=False)
+			return [True,"Privacy breach (Tor Exit node)..",5547]
 
 		return [False,"",0]
 
 	def checkifipisproxy(self,ipint):
 		#here do the checking
-        if self.load_blocked_urls:
-            chk_ip = ipint
-            df_sort=df.iloc[(df['start']-input).abs().argsort()[:5]]
-            
-            
-            
-            
-        
-    
-    def load_blocked_urls(url_blocked,tor_blocked,ip_blocked):
-        self.url_blocked = url_blocked.sort_values(by='start')
-        self.tor_blocked = tor_blocked.sort
-        self.ip_blocked = ip_blocked
-        self.loaded_blocked_urls = True
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if self.load_blocked_urls:
+      chk_ip = ipint
+      df_sort=df.iloc[(df['start']-input).abs().argsort()[:5]]
 		
 
 	def return_htmlerror(self,errorcode,errordescrp):
-		return error_html.encode()
+		rep = error_html.replace('errorcode',str(errorcode)).replace('errordescription',str(errordescrp))
+		return rep.encode()
 
 	def tcp_message(self,flow:tcp.TCPFlow):
 		message = flow.messages[-1]
