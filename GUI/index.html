@@ -10,6 +10,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="tables.css"/>
     <title>VQuake</title>
   </head>
   <body id="body">
@@ -35,7 +36,8 @@
       </nav>
 
       <main>
-        <div style="width: 100%; height: 100%; display: none;" id="Div1">
+        <!-- Dashbord Div1 -->
+        <div style="width: 100%; height: 100%;" id="Div1">
           <div style="display: flex; width: 100%; height: 100%;">
             <div class="dashboard" >
               
@@ -86,6 +88,7 @@
             </div>
           </div>
         </div>
+        <!-- Connections Div2 -->
         <div id="Div2" style="position: absolute; display: none;">
           <div class="main__container">
             <h2>Connections</h2>
@@ -137,9 +140,9 @@
               </a>
             </div>
             <div class="btnGroup">
-              <button class="btn">Status</button> 
-              <button class="btn" >Tables</button> 
-              <button class="btn">Logs</button>
+              <button class="btn" onclick="divVisibility('Div4');">Status</button> 
+              <button class="btn" onclick="divVisibility('Div5');">Tables</button> 
+              <button class="btn" onclick="divVisibility('Div6');">Logs</button>
             </div>
             <div class="machinespec">
               <div></div>
@@ -147,8 +150,10 @@
             </div>
           </div>
         </div>
-        <div id="Div4" style="display: none;"><p>I'm Div Three</p> </div>
-        <div id="Div3" style="display: none; height: 50%; width: 100%; padding-top: 30px;">
+        <!-- Settings Div3 -->
+        <div id="Div3" style="display: none;"><p>I'm Div Three</p> </div>
+        <!-- Status Div4 -->
+        <div id="Div4" style="display: none; height: 50%; width: 100%; padding-top: 30px;">
           <div  class="main__container">
             <div style="float: left; text-align: center;">
               <div class="card">
@@ -203,7 +208,55 @@
                 </span></h1>
               </div>
             </div>
+          </div>
         </div>
+        <!-- Tables Div5 -->
+        <div id="Div5" style="display: none;">
+          <div class="main__container">
+            <div class="card" style="width: 600px;">
+              <div class="card_inner">
+                <p class="text-primary-p">FILTERS: </p>
+                <button class="btn1">URL filtering</button>
+                <button class="btn1">Add IPtables</button>
+              </div>
+            </div>
+            <div class="tablediv">
+              <table>
+                <thead>
+                    <tr>
+                        <th>Rule</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="priority-200">
+                        <td class="name"></td>
+                        <td class="clicks"></td>
+                    </tr>
+    
+                    <tr class="priority-600">
+                        <td class="impressions"></td>
+                        <td class="delete"><button class="delete-btn"></td>
+                    </tr>
+    
+                    <tr class="priority-300">
+                        <td class="priority"></td>
+                        <td class="impressions"></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="card" style="width: 600px; margin-top: 20px;">
+              <div class="card_inner">
+                <p class="text-primary-p">Edit Banned </p>
+                <button class="btn1">Tor Exit Node</button>
+                <button class="btn1">Proxy IP's</button>
+              </div>
+            </div>  
+          </div>
+        </div>
+        <!-- Logs Div6 -->
+        <div id="Div6" style="display: none;"><p>I'm Div Logs</p> </div>
       </main>
 
       <div id="sidebar" >
