@@ -43,13 +43,13 @@
               
               <div class="card">
                 <div class="card_inner">
-                  <p class="text-primary-p">Registered Firewall</p>
+                  <p class="text-primary-p">REGISTERED FIREWALL</p>
                   <span class="font-bold text-title">45</span>
                 </div>
               </div>
               <div class="card">
                 <div class="card_inner">
-                  <p class="text-primary-p">SER</p>
+                  <p class="text-primary-p">SERIAL</p>
                   <span class="font-bold text-title">FGXIZUYMR</span>
                 </div>
               </div>
@@ -116,6 +116,21 @@
               <a href="#" class="connectedDevice">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-times"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-times"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-check"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-check"></i></p>
                 <p>SGR : FGX-1542</p>
               </a>
               <a href="#" class="connectedDevice">
@@ -312,8 +327,10 @@
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jquery.nicescroll.min.js"></script>
+    <script src="script.js"></script>
     <script src="https://kit.fontawesome.com/874986f905.js" crossorigin="anonymous"></script>
     <script>
       // active navigation tab
@@ -335,6 +352,12 @@
         } 
         this.classList.add("activeDevice"); 
       });
+    </script>
+
+    <script>
+      $(function() {  
+  $(".do-nicescroll").niceScroll();
+});
     </script>
   </body>
 </html>

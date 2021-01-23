@@ -14,11 +14,11 @@ var divs = ["Div1", "Div2", "Div3", "Div4", "Div5", "Div6"];
         divId = divs[i];
         div = document.getElementById(divId);
         if(visibleDivId === divId) {
-          div.style.display = "block";
+          div.style.display = "";
         } else {
           div.style.display = "none";
         }
-      }
+      } $(".connection").css("overflow", "auto");
     }
 
     window.addEventListener('pywebviewready', function() {
