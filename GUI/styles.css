@@ -201,9 +201,18 @@ main {
   font-weight: 700;
 }
 
+.sidebar__menu > a{
+  text-decoration: none;
+}
+
+.sidebar__menu > a > div > span {
+  font-size: 15px;
+  font-weight: 1000;
+}
+
 .sidebar__link {
   color: #9d9eb0;
-  padding: 50px;
+  padding: 15px;
   border-radius: 3px;
   margin-bottom: 5px;
 }
@@ -226,7 +235,7 @@ main {
 
 .sidebar__link > i {
   margin-right: 10px;
-  font-size: 80px;
+  font-size: 50px;
 }
 
 .sidebar__logout {
@@ -255,7 +264,7 @@ main {
   position: absolute;
 }
 
-@media only screen and (max-width: 978px) {
+@media only screen and (max-width: 700px) {
   .container {
     grid-template-columns: 1fr;
     /* grid-template-rows: 0.2fr 2.2fr; */
