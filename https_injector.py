@@ -4,9 +4,7 @@ from mitmproxy.proxy.server import ProxyServer
 from mitmproxy.tools.dump import DumpMaster
 from mitmproxy.net.http.http1.assemble import assemble_request
 from bs4 import BeautifulSoup
-import threading,asyncio,time,Levenshtein,pandas
-
-
+import threading,asyncio,time,Levenshtein,pandas,sqlite3
 from scapy.all import *
 from scapy.layers.http import HTTPRequest # import HTTP packet
 from mitmproxy.utils import strutils
@@ -60,6 +58,9 @@ class Addon(object):
 			url_blocked.to_csv('db/url_filter.csv', mode='a', header=False)
 			return [True,"Privacy breach (Tor Exit node)..",5547]
 
+		self.addtonmapprocess(filter_param.server_conn.ip_address)
+			
+
 		return [False,"",0]
 
 	def checkifipisproxy(self,ipint):
@@ -74,6 +75,9 @@ class Addon(object):
 	def tcp_message(self,flow:tcp.TCPFlow):
 		message = flow.messages[-1]
 		print(message)
+
+	def addtonmapprocess(self,ip):
+		pass
 
 # see source mitmproxy/master.py for details
 def loop_in_thread(loop, m):
