@@ -1,7 +1,13 @@
+var divs = ["Div1", "Div2", "Div3", "Div4", "Div5", "Div6","Div7"];
 var clientserial;
 
-var divs = ["Div1", "Div2", "Div3", "Div4", "Div5", "Div6"];
     var visibleDivId = null;
+    
+function queryandhide(divId){
+  divVisibility(divId);
+  queryserver();
+}
+
     function divVisibility(divId) {
       if(visibleDivId === divId) {
         visibleDivId = divId;
@@ -10,6 +16,7 @@ var divs = ["Div1", "Div2", "Div3", "Div4", "Div5", "Div6"];
       }
       hideNonVisibleDivs();
     }
+
     function hideNonVisibleDivs() {
       var i, divId, div;
       for(i = 0; i < divs.length; i++) {
