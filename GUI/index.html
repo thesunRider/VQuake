@@ -30,26 +30,39 @@
       </nav>
 
       <main>
-        <div class="main__container">
+        <div class="main__container" id="Div1">
           <h1>Connected Devices</h1>
         </div>
+        <div id="Div2" style="position: absolute; display: none;"><p>I'm Div Two</p>
+          <h1>hiiiiiii</h1> 
+        </div>
+        <div id="Div3" style="display: none;"><p>I'm Div Three</p> </div>
       </main>
 
-      <div id="sidebar">
+      </main>
+
+      <div id="sidebar" onclick="myFunction(event)">
         <div class="sidebar__menu">
-          <div class="sidebar__link active_menu_link">
-            <i class="fa fa-eye "></i>
-            <a href="#">Dashboard</a>
-          </div>
-         
-          <div class="sidebar__link">
-            <i class="fa fa-user-secret" aria-hidden="true"></i>
-            <a href="#">Connectins</a>
-          </div>
-          <div class="sidebar__link">
-            <i class="fa fa-cogs"></i>
-            <a href="#">Settings</a>
-          </div>  
+          <a href="#" onclick="divVisibility('Div1');" class="">
+            <div class="sidebar__link active_menu_link">
+              <i class="fa fa-eye "></i>
+              <span>Dashboard</span>
+            </div>
+          </a>
+
+          <a href="#" onclick="divVisibility('Div2');">
+            <div class="sidebar__link">
+              <i class="fa fa-user-secret" aria-hidden="true"></i>
+              <span>Connections</span> 
+            </div>
+          </a>
+
+          <a href="#" onclick="divVisibility('Div3');">
+            <div class="sidebar__link">
+              <i class="fa fa-cogs"></i>
+              <span>Settings</span> 
+            </div>
+          </a> 
         </div>
       </div>
     </div>
