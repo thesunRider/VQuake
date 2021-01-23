@@ -145,6 +145,7 @@ main {
   background: #2e364d;
   grid-area: sidebar;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 0px;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
@@ -279,7 +280,7 @@ main {
 
 .connection{
   margin-top: 15px;
-  /* width: 92%; */
+  width: 98%;
   height: 200px;
   overflow:auto;
   
