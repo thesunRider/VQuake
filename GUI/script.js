@@ -1,4 +1,4 @@
-var divs = ["Div1", "Div2", "Div3", "Div4"];
+var divs = ["Div1", "Div2", "Div3", "Div4", "Div5", "Div6"];
     var visibleDivId = null;
     function divVisibility(divId) {
       if(visibleDivId === divId) {
@@ -20,7 +20,6 @@ var divs = ["Div1", "Div2", "Div3", "Div4"];
         }
       }
     }
-
 
     window.addEventListener('pywebviewready', function() {
       console.log('Re-established connection');
