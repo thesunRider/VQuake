@@ -44,7 +44,7 @@
               <div class="card">
                 <div class="card_inner">
                   <p class="text-primary-p">REGISTERED FIREWALL</p>
-                  <span class="font-bold text-title">45</span>
+                  <span class="font-bold text-title">2</span>
                 </div>
               </div>
               <div class="card">
@@ -56,13 +56,13 @@
               <div class="card">
                 <div class="card_inner">
                   <p class="text-primary-p">ENABLED AI</p>
-                  <span class="font-bold text-title">12</span>
+                  <span class="font-bold text-title">YES</span>
                 </div>
               </div>
               <div class="card">
                 <div class="card_inner">
                   <p class="text-primary-p">REQUEST INTERCEPTED</p>
-                  <span class="font-bold text-title">10000</span>
+                  <span class="font-bold text-title">10k</span>
                 </div>
               </div>
               <div class="card">
@@ -93,11 +93,6 @@
           <div class="main__container">
             <h2>Connections</h2>
             <div class="connection do-nicescroll">
-              <a href="#" class="connectedDevice activeDevice" >
-                <i class="fal fa-desktop"></i>
-                <p>Connected : <i class="fa fa-check"></i></p>
-                <p>SGR : FGX-1542</p>
-              </a>
               <a href="#" class="connectedDevice" onclick="registerserial('fgx-1')">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-check"></i></p>
@@ -201,7 +196,7 @@
             <div class="card" style="width: 600px;">
               <div class="card_inner">
                 <p class="text-primary-p">FILTERS: </p>
-                <button onclick="queryandhide('Div7');" class="btn1">URL filtering</button>
+                <button onclick="queryandhide_urlfilter('Div7');" class="btn1">URL filtering</button>
                 <button class="btn1">Add IPtables</button>
               </div>
             </div>
@@ -215,15 +210,23 @@
                 </thead>
                 <tbody>
                     <tr class="priority-200">
-                        <td class="name"></td>
-                        <td class="clicks"></td>
+                        <td class="name">SSH TUNNEL</td>
+                        <td class="clicks"> ENABLED</td>
+                    </tr>
+                     <tr class="priority-200">
+                        <td class="name">TOR TUNNEL</td>
+                        <td class="clicks"> DISABLED</td>
+                    </tr>
+                     <tr class="priority-200">
+                        <td class="name">TELNET</td>
+                        <td class="clicks"> ENABLED</td>
                     </tr>
             </table>
             </div>
             <div class="card" style="width: 600px; margin-top: 20px;">
               <div class="card_inner">
                 <p class="text-primary-p">Edit Banned </p>
-                <button class="btn1">Tor Exit Node</button>
+                <button class="btn1" onclick="queryandhide_torfilter('Div7');">Tor Entry Node</button>
                 <button class="btn1">Proxy IP's</button>
               </div>
             </div>
@@ -238,19 +241,10 @@
               <table>
                 <thead>
                     <tr>
-                        <th>IP</th>
-                        <th>PORT</th>
-                        <th>PROCESSED</th>
-                        
+                        <th>URL</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="priority-300">
-                        <td class="name"></td>
-                        <td class="clicks"></td>
-                        <td class="priority"></td>
-                        
-                    </tr>
+                <tbody id="urlfilter_base">
                 </tbody>
               </table>
             </div>

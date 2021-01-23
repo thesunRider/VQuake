@@ -67,7 +67,7 @@ class WebApi:
 		exit()
 
 	def get_urlblocked(self,client_serial):
-		response = requests.get('http://localhost:3000/client/' + client_serial)
+		response = requests.post('http://localhost:3000/client' ,json={'ser:':client_serial,'query':'url_filter'})
 
 		print("THIS IS PRINTED IN PYTHON",response.text)
 		#return that to javascript

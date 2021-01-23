@@ -3,9 +3,9 @@ var clientserial;
 
     var visibleDivId = null;
     
-function queryandhide(divId){
+function queryandhide_urlfilter(divId){
   divVisibility(divId);
-  queryserver();
+  queryserver_urlfilter();
 }
 
     function divVisibility(divId) {
@@ -44,10 +44,16 @@ function queryandhide(divId){
       clientserial = serial;
     }
 
-    function queryserver(){
+    function queryserver_urlfilter(){
       //the ending .then is necessary since this is a promise 
       pywebview.api.get_urlblocked(clientserial).then(function(response) {
-          alert(response);
+          resp = JSON.parse(response);
+          var injectml = '';
+          for (var i = 0; i < resp.length; i++) {
+            injectml += '<tr class="priority-300"> <td class="name">'+resp[i].url +'</td></tr>';
+          }
+
+          document.getElementById('urlfilter_base').innerHTML +=  injectml;
       });
     }
 
