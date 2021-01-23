@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+    --container-background: #273349;
+    --table-background: #1c223b;
+    --table-background-hover: #151b31;
+    --table-text: #e2e2e2;
+    --priority-200: #d6a13f;
+    --priority-300: #4480e7;
+    --priority-600: #40c587;
+    --delete-background: #242c4c;
+    --delete-color: #909090;
+    --delete-hover: #ff0000;
+}
+
+
+.outer-container {
+    background-color: var(--container-background);
+    /* box-shadow: 0 5px 10px rgba(12,16,31,0.4); */
+    padding: 0.7rem;
+    margin: 10px;
+    border-radius: 0.625rem;
+    box-shadow: 0 5px 10px rgba(12,16,31,0.4);
+}
+
+/* Start Table Styles */
+table {
+    color: var(--table-text);
+    font-size: 0.875rem;
+    padding: 0.125rem;
+    width: 100%;
+}
+
+table th {
+    font-size: 1rem;
+}
+table th, table td {
+    padding: 0.5375rem;
+    text-align: left;
+}
+table tbody tr {
+    background-color: var(--table-background);
+}
+table tbody tr:hover {
+    background-color: var(--table-background-hover);
+    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+}
+table tbody tr td:first-of-type {
+    border-top-left-radius: 0.3125rem;
+    border-bottom-left-radius: 0.3125rem;
+}
+table tbody tr td:last-of-type {
+    border-top-right-radius: 0.3125rem;
+    border-bottom-right-radius: 0.3125rem;
+    text-align: center;
+}
+table tbody tr.priority-200 td:first-of-type {
+    border-left: 0.3125rem solid var(--priority-200);
+}
+table tbody tr.priority-300 td:first-of-type {
+    border-left: 0.3125rem solid var(--priority-300);
+}
+table tbody tr.priority-600 td:first-of-type {
+    border-left: 0.3125rem solid var(--priority-600);
+}
+table tbody tr td .fa-circle {
+    transform: scale(0.7);
+}
+table tbody tr.priority-200 td .fa-circle {
+    color: var(--priority-200);
+}
+table tbody tr.priority-300 td .fa-circle {
+    color: var(--priority-300);
+}
+table tbody tr.priority-600 td .fa-circle {
+    color: var(--priority-600);
+}
+.delete-btn {
+    cursor: pointer;
+    background-color: var(--delete-background);
+    background-color: transparent;
+    border: 0;
+    border-radius: 0.125rem;
+    color: var(--delete-color);
+    font-size: 1.1rem;
+    opacity: 0.2;
+    padding: 0.3125rem 0.625rem;
+}
+.delete-btn:hover {
+    color: var(--delete-hover);
+}
+.delete-btn:focus {
+  outline: 0;
+}
+table tbody tr:hover .delete-btn {
+    opacity: 1;
+}
+/* End Table Styles */
+/* END OUTER CONTAINER STYLES */
+
+
+/* KEYFRAMES */
+/* Fade In Webpage Keyframe */
+@keyframes fadeInPage {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* MEDIA QUERIES */
+@media(max-width: 768px) {
+    .outer-container {
+        padding: 1.25rem;
+    }
+    h1 {
+        margin: 0;
+    }
+}
+@media(max-width: 668px) {
+    table th:nth-of-type(3), table td:nth-of-type(3) {
+        display: none;
+    }
+}

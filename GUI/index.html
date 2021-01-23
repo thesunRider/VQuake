@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="tables.css"/>
+    <title>VQuake</title>
+  </head>
+  <body id="body">
+    <div class="container">
+      <nav class="navbar pywebview-drag-region">
+        <div class="navbar__left">
+          <h1>VQuake <span><i class="fa fa-anchor" aria-hidden="true"></i>
+          </span></h1>
+        </div>
+        <div class="navbar__right">
+          <a href="#">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+          </a>
+          <a href="#">
+            <i class="fal fa-minus" aria-hidden="true"></i>
+          </a>
+          <a href="#" onclick="quit()">
+            <i class="fal fa-times" aria-hidden="true"></i>
+
+         </a>
+          
+        </div>
+      </nav>
+
+      <main>
+        <!-- Dashbord Div1 -->
+        <div style="width: 100%; height: 100%;" id="Div1">
+          <div style="display: flex; width: 100%; height: 100%;">
+            <div class="dashboard" >
+              
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">REGISTERED FIREWALL</p>
+                  <span class="font-bold text-title">45</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">SERIAL</p>
+                  <span class="font-bold text-title">FGXIZUYMR</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">ENABLED AI</p>
+                  <span class="font-bold text-title">12</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">REQUEST INTERCEPTED</p>
+                  <span class="font-bold text-title">10000</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">BLOCKED CONNECTIONS</p>
+                  <span class="font-bold text-title">100</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-right: 40px;">
+            <div class="logodiv">
+              <h1 >VQuake<span><i class="fa fa-anchor" aria-hidden="true"></i>
+              </span></h1>
+            </div>
+            <div class="btndiv" >
+              
+              <div id="outer_circle">
+                <div id="animated_circle">
+                </div>
+                <div id="inner_circle"><span class="spany"><i style="font-size: 70px;" class="fal fa-check " aria-hidden="true"></i></span></div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Connections Div2 -->
+        <div id="Div2" style="position: absolute; display: none;">
+          <div class="main__container">
+            <h2>Connections</h2>
+            <div class="connection do-nicescroll">
+              <a href="#" class="connectedDevice activeDevice" >
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-check"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-check"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-times"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-check"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-times"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-times"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-check"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-check"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-times"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-check"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-check"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+              <a href="#" class="connectedDevice">
+                <i class="fal fa-desktop"></i>
+                <p>Connected : <i class="fa fa-times"></i></p>
+                <p>SGR : FGX-1542</p>
+              </a>
+            </div>
+            <div class="btnGroup">
+              <button class="btn" onclick="divVisibility('Div4');">Status</button> 
+              <button class="btn" onclick="divVisibility('Div5');">Tables</button> 
+              <button class="btn" onclick="divVisibility('Div6');">Logs</button>
+            </div>
+            
+            <div class="machinespec">
+              
+              <div style="flex: 50%">
+                <h3>MACHINE SPEC</h3>
+              <p>OS: <span>Windows</span> </p>
+              <p>SENSITIVITY: <span>15</span> </p>
+              <p>AI ENABLED: <span>TRUE</span> </p>
+              <p>SER: <span>FEXGDDKJ</span> </p>
+              </div>
+              <div style="flex: 50%; margin-top: 30px;">
+                <p>BLOCKED CONNECTION: <span>100</span> </p>
+                <p>PROCESSED CONNECTION: <span>100000</span> </p>
+                <button >CONNECT</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Settings Div3 -->
+        <div id="Div3" style="display: none;"><p>I'm Div Three</p> </div>
+        <!-- Status Div4 -->
+        <div id="Div4" style="display: none; height: 50%; width: 100%; padding-top: 30px;">
+          <div  class="main__container">
+            <div style="float: left; text-align: center;">
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">AI ENGINE</p>
+                  <label class="switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" checked />
+                    <div class="slider round"></div>
+                  </label>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">HTTTP/S INJECTORS</p>
+                  <label class="switch" for="checkbox1">
+                    <input type="checkbox" id="checkbox1" checked/>
+                    <div class="slider round"></div>
+                  </label>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">TOR DETECTOR</p>
+                  <label class="switch" for="checkbox2">
+                    <input type="checkbox" id="checkbox2" checked/>
+                    <div class="slider round"></div>
+                  </label>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">SSH DETECTOR</p>
+                  <label class="switch" for="checkbox3">
+                    <input type="checkbox" id="checkbox3" checked/>
+                    <div class="slider round"></div>
+                  </label>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">OPEN VPN DETECTOR</p>
+                  <label class="switch" for="checkbox4">
+                    <input type="checkbox" id="checkbox4" checked/>
+                    <div class="slider round"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div style="float: right; width: 50%; height: 100%;">
+              <div class="logodiv">
+                <h1 >VQuake<span><i class="fa fa-anchor" aria-hidden="true"></i>
+                </span></h1>
+              </div>
+            </div>
+            <button class="btn-back" onclick="divVisibility('Div2');">Go back 
+              <i class="fas fa-arrow-left"></i></button>
+          </div>
+        </div>
+        <!-- Tables Div5 -->
+        <div id="Div5" style="display: none;">
+          <div class="main__container">
+            <div class="card" style="width: 600px;">
+              <div class="card_inner">
+                <p class="text-primary-p">FILTERS: </p>
+                <button class="btn1">URL filtering</button>
+                <button class="btn1">Add IPtables</button>
+              </div>
+            </div>
+            <div class="tablediv">
+              <table>
+                <thead>
+                    <tr>
+                        <th>Rule</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="priority-200">
+                        <td class="name"></td>
+                        <td class="clicks"></td>
+                    </tr>
+            </table>
+            </div>
+            <div class="card" style="width: 600px; margin-top: 20px;">
+              <div class="card_inner">
+                <p class="text-primary-p">Edit Banned </p>
+                <button class="btn1">Tor Exit Node</button>
+                <button class="btn1">Proxy IP's</button>
+              </div>
+            </div>
+            <button class="btn-back" onclick="divVisibility('Div2');">Go back 
+              <i class="fas fa-arrow-left"></i></button>  
+          </div>
+        </div>
+        <!-- Logs Div6 -->
+        <div id="Div6" style="display: none;">
+          <div class="main__container">
+            <div class="tablediv">
+              <table>
+                <thead>
+                    <tr>
+                        <th>SRC Port</th>
+                        <th>DST Port</th>
+                        <th>DST IP</th>
+                        <th>Flagged</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="priority-300">
+                        <td class="name"></td>
+                        <td class="clicks"></td>
+                        <td class="priority"></td>
+                        <td class="impressions"></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top: 10px;">
+              <button class="btn1">Fetch More</button>
+              <button class="btn" style="float: right; margin-right: 11px;">clear</button>
+            </div>
+          </div>
+          <button class="btn-back" onclick="divVisibility('Div2');">Go back 
+            <i class="fas fa-arrow-left"></i></button>
+        </div>
+      </main>
+
+      <div id="sidebar" >
+        <div class="sidebar__menu">
+          <a href="#" onclick="divVisibility('Div1');" class="">
+            <div class="sidebar__link active_menu_link">
+              <i class="fal fa-eye "></i>
+              <span>Dashboard</span>
+            </div>
+          </a>
+
+          <a href="#" onclick="divVisibility('Div2');">
+            <div class="sidebar__link">
+              <i class="fal fa-user-secret" aria-hidden="true"></i>
+              <span>Connections</span> 
+            </div>
+          </a>
+
+          <a href="#" onclick="divVisibility('Div3');">
+            <div class="sidebar__link">
+              <i class="fal fa-cogs"></i>
+              <span>Settings</span> 
+            </div>
+          </a> 
+        </div>
+      </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jquery.nicescroll.min.js"></script>
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/874986f905.js" crossorigin="anonymous"></script>
+    <script>
+      // active navigation tab
+      $(".sidebar__link").click(function() { 
+        var listItems = $(".sidebar__link"); 
+        for (let i = 0; i < listItems.length; i++) { 
+            listItems[i].classList.remove("active_menu_link"); 
+        } 
+        this.classList.add("active_menu_link"); 
+      });
+    </script>
+
+    <script>
+      // active connection
+      $(".connectedDevice").click(function() {  
+        var listItems = $(".connectedDevice"); 
+        for (let i = 0; i < listItems.length; i++) { 
+            listItems[i].classList.remove("activeDevice"); 
+        } 
+        this.classList.add("activeDevice"); 
+      });
+    </script>
+
+    <script>
+      $(function() {  
+  $(".do-nicescroll").niceScroll();
+});
+    </script>
+  </body>
+</html>
