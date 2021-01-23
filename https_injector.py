@@ -17,6 +17,7 @@ from mitmproxy import http
 class Addon(object):
 	def __init__(self):
 		self.num = 1
+        self.loaded_blocked_urls=False
 
 	def request(self, flow):
 		self.num += 1
@@ -64,7 +65,9 @@ class Addon(object):
 
 	def checkifipisproxy(self,ipint):
 		#here do the checking
-		return True
+    if self.load_blocked_urls:
+      chk_ip = ipint
+      df_sort=df.iloc[(df['start']-input).abs().argsort()[:5]]
 		
 
 	def return_htmlerror(self,errorcode,errordescrp):
