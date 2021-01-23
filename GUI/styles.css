@@ -279,13 +279,13 @@ main {
 
 .connection{
   margin-top: 15px;
-  width: 92%;
+  /* width: 92%; */
   height: 200px;
   overflow:auto;
   
   flex-direction: column;
-  padding: 25px;
-  background:  #1c223b;
+  /* padding: 25px; */
+  background:  #1f2642;
   border-radius: 0.625rem;
   box-shadow: 0 5px 10px rgba(12,16,31,0.4);
   display: inline-block;
@@ -313,9 +313,10 @@ main {
   color: white;
   border: 2px solid #6533ae;
   padding: 5px;
-  font-size: 12px;
+  font-size: 16px;
   border-radius: 5px;
   width: 80px;
+  margin-left: 10px;
 }
 
 .card {
@@ -462,3 +463,10 @@ main {
 
 
 /* circle ended */
+
+.btnGroup{
+  display: flex;
+  margin-top: 10px;
+  position: absolute;
+  right: 20px;
+}
