@@ -58,39 +58,18 @@ class Addon(object):
 		if filter_param.find('/tor/server/') != -1:
 			url_blocked.loc[len(df)] = [filter_param]
 			url_blocked.to_csv('db/url_filter.csv', mode='a', header=False)
+			return [True,"Privacy breach (Tor Exit node)..",5547]
 
 		return [False,"",0]
 
 	def checkifipisproxy(self,ipint):
 		#here do the checking
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		return True
 		
 
 	def return_htmlerror(self,errorcode,errordescrp):
-		return error_html.encode()
+		rep = error_html.replace('errorcode',str(errorcode)).replace('errordescription',str(errordescrp))
+		return rep.encode()
 
 	def tcp_message(self,flow:tcp.TCPFlow):
 		message = flow.messages[-1]
