@@ -1,3 +1,5 @@
+var clientserial;
+
 var divs = ["Div1", "Div2", "Div3", "Div4", "Div5", "Div6"];
     var visibleDivId = null;
     function divVisibility(divId) {
@@ -29,6 +31,17 @@ var divs = ["Div1", "Div2", "Div3", "Div4", "Div5", "Div6"];
     function quit() {
     console.log('quiting');
      pywebview.api.quit();
+    }
+
+    function registerserial(serial){
+      clientserial = serial;
+    }
+
+    function queryserver(){
+      //the ending .then is necessary since this is a promise 
+      pywebview.api.get_urlblocked(clientserial).then(function(response) {
+          alert(response);
+      });
     }
 
     function catchException() {

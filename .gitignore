@@ -1,4 +1,5 @@
 vscode/*
 db/filtered.db
 DataCollection/rfreg.zip
+tests/*
 

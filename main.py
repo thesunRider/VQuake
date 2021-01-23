@@ -1,5 +1,5 @@
 import threading,time ,sys, random, webview,io
-
+import requests,json
 
 
 html = open('GUI/index.html').read()
@@ -11,25 +11,25 @@ html = open('GUI/index.html').read()
 <meta charset="UTF-8">
 
 <style>
-    #response-container {
-        display: none;
-        padding: 3rem;
-        margin: 3rem 5rem;
-        font-size: 120%;
-        border: 5px dashed #ccc;
-    }
+	#response-container {
+		display: none;
+		padding: 3rem;
+		margin: 3rem 5rem;
+		font-size: 120%;
+		border: 5px dashed #ccc;
+	}
 
-    label {
-        margin-left: 0.3rem;
-        margin-right: 0.3rem;
-    }
+	label {
+		margin-left: 0.3rem;
+		margin-right: 0.3rem;
+	}
 
-    button {
-        font-size: 100%;
-        padding: 0.5rem;
-        margin: 0.3rem;
-        text-transform: uppercase;
-    }
+	button {
+		font-size: 100%;
+		padding: 0.5rem;
+		margin: 0.3rem;
+		text-transform: uppercase;
+	}
 
 </style>
 </head>
@@ -55,20 +55,27 @@ html = open('GUI/index.html').read()
 
 
 class WebApi:
-    def __init__(self):
-        pass
+	def __init__(self):
+		pass
 
-    def error(self):
-        raise Exception('This is a Python exception')
+	def error(self):
+		raise Exception('This is a Python exception')
 
-    def quit(self):
-        window.destroy()
-        print('quiting python')
-        exit()
+	def quit(self):
+		window.destroy()
+		print('quiting python')
+		exit()
+
+	def get_urlblocked(self,client_serial):
+		response = requests.get('http://localhost:3000/client/' + client_serial)
+
+		print("THIS IS PRINTED IN PYTHON",response.text)
+		#return that to javascript
+		return response.text
 
 
 
 if __name__ == '__main__':
-    api = WebApi()
-    window = webview.create_window('API example', url="./GUI/index.html",frameless=True,resizable=False,width=772, height=556,easy_drag=True,js_api=api)
-    webview.start(debug=True,http_server=True)
+	api = WebApi()
+	window = webview.create_window('API example', url="./GUI/index.html",frameless=True,resizable=False,width=772, height=556,easy_drag=True,js_api=api)
+	webview.start(debug=True,http_server=True)

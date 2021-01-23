@@ -98,61 +98,17 @@
                 <p>Connected : <i class="fa fa-check"></i></p>
                 <p>SGR : FGX-1542</p>
               </a>
-              <a href="#" class="connectedDevice">
+              <a href="#" class="connectedDevice" onclick="registerserial('fgx-1')">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-check"></i></p>
-                <p>SGR : FGX-1542</p>
+                <p>SGR : FGX-1</p>
               </a>
-              <a href="#" class="connectedDevice">
+              <a href="#" class="connectedDevice" onclick="registerserial('fgx-2')">
                 <i class="fal fa-desktop"></i>
                 <p>Connected : <i class="fa fa-times"></i></p>
-                <p>SGR : FGX-1542</p>
+                <p>SGR : FGX-2</p>
               </a>
-              <a href="#" class="connectedDevice">
-                <i class="fal fa-desktop"></i>
-                <p>Connected : <i class="fa fa-check"></i></p>
-                <p>SGR : FGX-1542</p>
-              </a>
-              <a href="#" class="connectedDevice">
-                <i class="fal fa-desktop"></i>
-                <p>Connected : <i class="fa fa-times"></i></p>
-                <p>SGR : FGX-1542</p>
-              </a>
-              <a href="#" class="connectedDevice">
-                <i class="fal fa-desktop"></i>
-                <p>Connected : <i class="fa fa-times"></i></p>
-                <p>SGR : FGX-1542</p>
-              </a>
-              <a href="#" class="connectedDevice">
-                <i class="fal fa-desktop"></i>
-                <p>Connected : <i class="fa fa-check"></i></p>
-                <p>SGR : FGX-1542</p>
-              </a>
-              <a href="#" class="connectedDevice">
-                <i class="fal fa-desktop"></i>
-                <p>Connected : <i class="fa fa-check"></i></p>
-                <p>SGR : FGX-1542</p>
-              </a>
-              <a href="#" class="connectedDevice">
-                <i class="fal fa-desktop"></i>
-                <p>Connected : <i class="fa fa-times"></i></p>
-                <p>SGR : FGX-1542</p>
-              </a>
-              <a href="#" class="connectedDevice">
-                <i class="fal fa-desktop"></i>
-                <p>Connected : <i class="fa fa-check"></i></p>
-                <p>SGR : FGX-1542</p>
-              </a>
-              <a href="#" class="connectedDevice">
-                <i class="fal fa-desktop"></i>
-                <p>Connected : <i class="fa fa-check"></i></p>
-                <p>SGR : FGX-1542</p>
-              </a>
-              <a href="#" class="connectedDevice">
-                <i class="fal fa-desktop"></i>
-                <p>Connected : <i class="fa fa-times"></i></p>
-                <p>SGR : FGX-1542</p>
-              </a>
+             
             </div>
             <div class="btnGroup">
               <button class="btn" onclick="divVisibility('Div4');">Status</button> 
@@ -245,7 +201,7 @@
             <div class="card" style="width: 600px;">
               <div class="card_inner">
                 <p class="text-primary-p">FILTERS: </p>
-                <button class="btn1">URL filtering</button>
+                <button class="btn1" onclick="queryserver();" >URL filtering</button>
                 <button class="btn1">Add IPtables</button>
               </div>
             </div>
