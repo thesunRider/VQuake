@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>VQuake</title>
+  </head>
+  <body id="body">
+    <div class="container">
+      <nav class="navbar">
+        <div class="navbar__left">
+          <h1>VQuake <span><i class="fa fa-anchor" aria-hidden="true"></i>
+          </span></h1>
+        </div>
+        <div class="navbar__right">
+          
+          <div class="sidebar__logout">
+            <a href="#">
+            <i class="fa fa-power-off "></i>
+            exit</a>
+          </div>
+        </div>
+      </nav>
+
+      <main>
+        <div class="main__container" id="Div1">
+          <h1>Connected Devices</h1>
+        </div>
+        <div id="Div2" style="position: absolute; display: none;"><p>I'm Div Two</p>
+          <h1>hiiiiiii</h1> 
+        </div>
+        <div id="Div3" style="display: none;"><p>I'm Div Three</p> </div>
+      </main>
+
+      </main>
+
+      <div id="sidebar" onclick="myFunction(event)">
+        <div class="sidebar__menu">
+          <a href="#" onclick="divVisibility('Div1');" class="">
+            <div class="sidebar__link active_menu_link">
+              <i class="fa fa-eye "></i>
+              <span>Dashboard</span>
+            </div>
+          </a>
+
+          <a href="#" onclick="divVisibility('Div2');">
+            <div class="sidebar__link">
+              <i class="fa fa-user-secret" aria-hidden="true"></i>
+              <span>Connections</span> 
+            </div>
+          </a>
+
+          <a href="#" onclick="divVisibility('Div3');">
+            <div class="sidebar__link">
+              <i class="fa fa-cogs"></i>
+              <span>Settings</span> 
+            </div>
+          </a> 
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/874986f905.js" crossorigin="anonymous"></script>
+  </body>
+</html>
