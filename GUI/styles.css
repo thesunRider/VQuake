@@ -294,3 +294,47 @@ main {
   }
 }
 
+/* connection */
+
+.connection{
+  margin-top: 15px;
+  width: 92%;
+  height: 200px;
+  overflow:auto;
+  
+  flex-direction: column;
+  padding: 25px;
+  background:  #1c223b;
+  border-radius: 0.625rem;
+  box-shadow: 0 5px 10px rgba(12,16,31,0.4);
+  display: inline-block;
+}
+.connection > a > i {
+  font-size: 40px;
+  color: white;
+}
+.connection > a > p {
+  font-size: 14px;
+  color: white;
+}
+
+.connection > a {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  width: fit-content;
+  float: left;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.btn {
+  background-color: #6533ae;
+  color: white;
+  border: 2px solid #6533ae;
+  padding: 5px;
+  font-size: 12px;
+  border-radius: 5px;
+  width: 80px;
+}
+
+
