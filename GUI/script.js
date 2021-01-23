@@ -21,3 +21,16 @@ var divs = ["Div1", "Div2", "Div3", "Div4", "Div5", "Div6"];
       }
     }
 
+    window.addEventListener('pywebviewready', function() {
+      console.log('Re-established connection');
+    })
+
+
+    function quit() {
+    console.log('quiting');
+     pywebview.api.quit();
+    }
+
+    function catchException() {
+        pywebview.api.error().catch(showResponse);
+    }

@@ -45,7 +45,7 @@ body {
 
 .container {
   background-color: #000000;
-  color: #ffff;
+  color: #ffffff;
   display: grid;
   height: 100vh;
   grid-template-columns: 0.45fr 1fr 1fr 1fr;

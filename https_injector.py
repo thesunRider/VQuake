@@ -4,8 +4,9 @@ from mitmproxy.proxy.server import ProxyServer
 from mitmproxy.tools.dump import DumpMaster
 from mitmproxy.net.http.http1.assemble import assemble_request
 from bs4 import BeautifulSoup
-import threading,asyncio,time,Levenshtein,pandas
-
+import threading,asyncio,time,Levenshtein,pandas,sqlite3
+from scapy.all import *
+from scapy.layers.http import HTTPRequest # import HTTP packet
 from mitmproxy.utils import strutils
 from mitmproxy import ctx
 from mitmproxy import tcp
@@ -14,38 +15,72 @@ from mitmproxy import http
 class Addon(object):
 	def __init__(self):
 		self.num = 1
+        self.loaded_blocked_urls=False
 
 	def request(self, flow):
 		self.num += 1
 		#for every 5 requests do a probbing
 		print(self.num)
-		print("Probbing....")
-		if self.url_filtering(flow.request.pretty_url):
+		filtered = self.list_filtering(flow)
+		if filtered[0]:
 			flow.response = http.HTTPResponse.make(
-				200,  # (optional) status code
-				self.return_htmlerror(5545,"Blacklisted Url breach"),  # (optional) content
+				400,  # (optional) status code
+				self.return_htmlerror(filtered[2],filtered[1]),  # (optional) content
 				{"Content-Type": "text/html"}  # (optional) headers
 				)
 
 	def response(self, flow):
-		netrequest = ssemble_request(flow.request).decode('utf-8')
+		netrequest = assemble_request(flow.request).decode('utf-8')
 		soup = BeautifulSoup(flow.response.content, "html.parser")
 		soup.title.string
 
-	def url_filtering(self,url):
-		for index, row in url_blocked.iterrows():
-			print('comparing',url,' ',row['url'])
-			if url.find(row['url']) != -1:
-				print('Found Blacklisted URL,Blocking')
-				return True
-		return False
+	def list_filtering(self,filter_param):
+		#url filter
+		if len(url_blocked[url_blocked['url']==filter_param.request.pretty_url].index.tolist()) > 0:
+			print('Found Blacklisted URL,Blocking')
+			return [True,"Blacklisted URL Breach..",5545]
+
+
+		#eppol namak ip address kitti eni matte sanam load cheyth compare cheyka
+		ipint = int(ipaddress.IPv4Address(filter_param.server_conn.ip_address))
+		if self.checkifipisproxy(ipint):
+			print('Found Blacklisted IP,Blocking')
+			return [True,"Blacklisted IP Breach..",5546]
+
+		#tor exitnodefilter
+		if len(tor_blocked[tor_blocked['tor_exitnodes']==filter_param.request.pretty_url].index.tolist()) > 0:
+			print('Found Blacklisted Tor URL node')
+			return [True,"Privacy breach (Tor Exit node)..",5547]
+
+
+		#the connection is going to a tor client
+		if filter_param.find('/tor/server/') != -1:
+			url_blocked.loc[len(df)] = [filter_param]
+			url_blocked.to_csv('db/url_filter.csv', mode='a', header=False)
+			return [True,"Privacy breach (Tor Exit node)..",5547]
+
+		self.addtonmapprocess(filter_param.server_conn.ip_address)
+			
+
+		return [False,"",0]
+
+	def checkifipisproxy(self,ipint):
+		#here do the checking
+    if self.load_blocked_urls:
+      chk_ip = ipint
+      df_sort=df.iloc[(df['start']-input).abs().argsort()[:5]]
+		
 
 	def return_htmlerror(self,errorcode,errordescrp):
-		return "bad things happen".encode()
+		rep = error_html.replace('errorcode',str(errorcode)).replace('errordescription',str(errordescrp))
+		return rep.encode()
 
-	def tcp_message(self,flow):
+	def tcp_message(self,flow:tcp.TCPFlow):
 		message = flow.messages[-1]
-		breakpoint()
+		print(message)
+
+	def addtonmapprocess(self,ip):
+		pass
 
 # see source mitmproxy/master.py for details
 def loop_in_thread(loop, m):
@@ -55,7 +90,9 @@ def loop_in_thread(loop, m):
 
 if __name__ == "__main__":
 	url_blocked = pandas.read_csv('db/url_filter.csv')
-
+	tor_blocked = pandas.read_csv('db/tor_filter.csv')
+	ip_blocked = pandas.read_csv('db/ip_filter.csv')
+	error_html = open('GUI/error.html').read()
 
 
 	options = Options(listen_host='0.0.0.0', listen_port=8080, http2=True,client_certs='certs/')
