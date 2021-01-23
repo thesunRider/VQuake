@@ -20,18 +20,71 @@
           </span></h1>
         </div>
         <div class="navbar__right">
+          <a href="#">
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+          </a>
+          <a href="#">
+            <i class="fal fa-minus" aria-hidden="true"></i>
+          </a>
+          <a href="#">
+            <i class="fal fa-times" aria-hidden="true"></i>
+
+         </a>
           
-          <div class="sidebar__logout">
-            <a href="#">
-            <i class="fa fa-power-off "></i>
-            exit</a>
-          </div>
         </div>
       </nav>
 
       <main>
-        <div class="main__container" id="Div1">
-          <h1>Connected Devices</h1>
+        <div style="width: 100%; height: 100%; " id="Div1">
+          <div style="display: flex; width: 100%; height: 100%;">
+            <div class="dashboard" >
+              
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">Registered Firewall</p>
+                  <span class="font-bold text-title">45</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">SER</p>
+                  <span class="font-bold text-title">FGXIZUYMR</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">ENABLED AI</p>
+                  <span class="font-bold text-title">12</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">REQUEST INTERCEPTED</p>
+                  <span class="font-bold text-title">10000</span>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card_inner">
+                  <p class="text-primary-p">BLOCKED CONNECTIONS</p>
+                  <span class="font-bold text-title">100</span>
+                </div>
+              </div>
+            </div>
+            <div style="margin-right: 40px;">
+            <div class="logodiv">
+              <h1 >VQuake<span><i class="fa fa-anchor" aria-hidden="true"></i>
+              </span></h1>
+            </div>
+            <div class="btndiv" >
+              
+              <div id="outer_circle">
+                <div id="animated_circle">
+                </div>
+                <div id="inner_circle"><span class="spany"><i style="font-size: 70px;" class="fal fa-check " aria-hidden="true"></i></span></div>
+              </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="Div2" style="position: absolute; display: none;">
           <div class="main__container">
@@ -105,28 +158,26 @@
         </div>
         <div id="Div3" style="display: none;"><p>I'm Div Three</p> </div>
       </main>
-
-      </main>
-
-      <div id="sidebar">
+      
+      <div id="sidebar" >
         <div class="sidebar__menu">
           <a href="#" onclick="divVisibility('Div1');" class="">
             <div class="sidebar__link active_menu_link">
-              <i class="fa fa-eye "></i>
+              <i class="fal fa-eye "></i>
               <span>Dashboard</span>
             </div>
           </a>
 
           <a href="#" onclick="divVisibility('Div2');">
             <div class="sidebar__link">
-              <i class="fa fa-user-secret" aria-hidden="true"></i>
+              <i class="fal fa-user-secret" aria-hidden="true"></i>
               <span>Connections</span> 
             </div>
           </a>
 
           <a href="#" onclick="divVisibility('Div3');">
             <div class="sidebar__link">
-              <i class="fa fa-cogs"></i>
+              <i class="fal fa-cogs"></i>
               <span>Settings</span> 
             </div>
           </a> 
@@ -134,6 +185,22 @@
       </div>
     </div>
     <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/874986f905.js" crossorigin="anonymous"></script>
+    <script>
+       $(".sidebar__link").click(function() { 
+            
+            // Select all list items 
+            var listItems = $(".sidebar__link"); 
+              
+            // Remove 'active' tag for all list items 
+            for (let i = 0; i < listItems.length; i++) { 
+                listItems[i].classList.remove("active_menu_link"); 
+            } 
+              
+            // Add 'active' tag for currently selected item 
+            this.classList.add("active_menu_link"); 
+        }); 
+    </script>
   </body>
 </html>
