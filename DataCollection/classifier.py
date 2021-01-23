@@ -1,14 +1,17 @@
 import sklearn
 from sklearn.neural_network import  MLPClassifier
+from sklearn.ensemble import  RandomForestClassifier
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
 import pandas as pd
 import pickle 
-#loaded_model = pickle.load(open(filename, 'rb'))
-# I may have to improve the models , but this works , dunno if it classifies well(or at all) tho 
 
+# I may have to improve the models , but this works , dunno if it classifies well(or at all) tho 
+#usage instruction uncompress rfreg.zip
 class model:
 	
 	def __init__(self):
-		filename = 'finalized_model.sav'
+		filename = 'rfreg.sav'
 		self.model = pickle.load(open(filename,'rb'))
 		
 	def predict(self):
