@@ -23,13 +23,19 @@ class Trainer:
         self.predicted=0
         self.predict_step=400
         self.scaled = False
+
+
     def scale(self):
         self.training_data=DataScaler(self.training_data)
         self.testing_data=DataScaler(self.testing_data)
+
+
     def train(self):
         if  not self.scaled:
             self.scale()
         self.classifier.fit(self.training_data,self.testing_data)
+
+        
     def predict(self,data):
         self.classifier.predict(data)
     
